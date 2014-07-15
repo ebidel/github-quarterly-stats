@@ -1,0 +1,29 @@
+{
+  "name": "github-stats-scrapper",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Adds a quarterly stats button on a user's landing page",
+  "icons": {
+    "16": "icons/githubicon.png",
+    "48": "icons/githubicon.png",
+    "128": "icons/githubicon.png"
+  },
+  "page_action": {
+    "default_icon": "icons/githubicon.png"
+  },
+  "background": {
+    "scripts": ["src/background.js"]
+  },
+  "permissions": [
+    "https://github.com/*",
+    "activeTab",
+    "tabs"
+  ],
+  "content_scripts": [{
+    "matches": ["https://github.com/*"],
+    "js": [
+      "src/content.js",
+      "lib/moment/min/moment.min.js"
+    ]
+  }]
+}

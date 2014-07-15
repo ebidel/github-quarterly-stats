@@ -1,0 +1,25 @@
+{
+  "name": "github_stats_scrapper",
+  "main": "github_stats_scrapper.js",
+  "version": "0.0.1",
+  "authors": [
+    "Eric Bidelman <ebidel@gmail.com>"
+  ],
+  "description": "Fetch quarterly metrics for a given Github username",
+  "keywords": [
+    "github",
+    "chrome",
+    "extension"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "moment": "~2.7.0"
+  }
+}
