@@ -1,6 +1,6 @@
 {
   "name": "Github quarterly contributions",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "manifest_version": 2,
   "description": "Adds a quarterly stats button on a user's landing page",
   "icons": {
