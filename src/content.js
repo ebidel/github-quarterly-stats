@@ -60,7 +60,7 @@ GithubMetrics.prototype.fetchDateRangeMetrics = function(from, to, callback) {
   xhr.responseType = 'document';
   xhr.onload = function(e) {
     var d = e.target.response;
-    var contributions = d.querySelector('#contribution-activity-listing');
+    var contributions = d.querySelector('.contribution-activity-listing');
 
     var commits = contributions.querySelector('.octicon-git-commit');
     if (commits) {
