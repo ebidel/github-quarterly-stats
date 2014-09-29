@@ -14,7 +14,7 @@ if (!CONTRIBS_CONTAINER) {
   return
 }
 
-var CONTAINER = CONTRIBS_CONTAINER.querySelector('.contrib-details');
+var CONTAINER = CONTRIBS_CONTAINER;//.querySelector('.contrib-details');
 
 var USERNAME = document.querySelector('meta[property="profile:username"]');
 if (USERNAME) {
@@ -23,7 +23,7 @@ if (USERNAME) {
   USERNAME = document.location.pathname.split('/')[1];
 }
 
-var numQuartersAgo = 1;
+var numQuartersAgo = 0; // How many quarters ago to start at. 
 
 function addCommas(nStr) {
   nStr += '';
@@ -40,7 +40,7 @@ function addCommas(nStr) {
 function GithubMetrics(username, opt_numQuartersAgo) {
   this.username = username;
   this.total = {commits: 0, prs: 0, issues: 0};
-  this.numQuartersAgo = opt_numQuartersAgo || 1;
+  this.numQuartersAgo = (typeof opt_numQuartersAgo == 'undefined') ? 0 : opt_numQuartersAgo;
 
   this.startOfLastQuarter = moment().subtract(
       'quarter', this.numQuartersAgo).startOf('quarter');
@@ -112,27 +112,25 @@ GithubMetrics.prototype.fetchQuarterMetrics = function(opt_from, opt_to) {
     if (from < this.endOfLastQuarter) {
       this.fetchQuarterMetrics(from, to);
     } else {
-      //var CONTAINER = document.querySelector('#contributions-calendar .contrib-details');
-      
       var start = this.startOfLastQuarter.format('MMM DD YYYY');
       var end = this.endOfLastQuarter.format('MMM DD YYYY');
 
-      var commitsHTML = '<div class="table-column">' +
-                        '<span class="lbl">Quarter contributions</span>' +
-                        '<span class="num">' + addCommas(this.total.commits) + ' commits</span>' + 
-                         start + ' - ' + end + 
+      var commitsHTML = '<div class="contrib-column table-column">' +
+                          '<span class="text-muted">Quarter contributions</span>' +
+                          '<span class="contrib-number">' + addCommas(this.total.commits) + ' commits</span>' + 
+                          '<span class="text-muted">' + start + ' - ' + end + '</span>' +
                         '</div>';
-      var prsHTML = '<div class="table-column">' +
-                      '<span class="lbl">Quarter contributions</span>' +
-                      '<span class="num">' + addCommas(this.total.prs) + ' pull requests</span>' + 
-                       start + ' - ' + end + 
+      var prsHTML = '<div class="contrib-column table-column">' +
+                      '<span class="text-muted">Quarter contributions</span>' +
+                      '<span class="contrib-number">' + addCommas(this.total.prs) + ' pull requests</span>' + 
+                      '<span class="text-muted">' + start + ' - ' + end + '</span>' +
                     '</div>';
-      var issuesHTML = '<div class="table-column">' +
-                         '<span class="lbl">Quarter contributions</span>' +
-                         '<span class="num">' + addCommas(this.total.issues) + ' issues reported</span>' + 
-                         start + ' - ' + end + 
+      var issuesHTML = '<div class="contrib-column table-column">' +
+                         '<span class="text-muted">Quarter contributions</span>' +
+                         '<span class="contrib-number">' + addCommas(this.total.issues) + ' issues reported</span>' + 
+                         '<span class="text-muted">' + start + ' - ' + end + '</span>' +
                        '</div>';
-      var html = '<div class="contrib-details">' +
+      var html = '<div>' +
                    commitsHTML + prsHTML + issuesHTML +
                  '</div>';
       CONTAINER.insertAdjacentHTML('beforeend', html);
@@ -163,7 +161,8 @@ a.onclick = function(e) {
   (new GithubMetrics(USERNAME, numQuartersAgo++)).fetchQuarterMetrics();
 };
 
-CONTRIBS_CONTAINER.insertBefore(a, CONTAINER);
+//CONTRIBS_CONTAINER.insertBefore(a, CONTAINER);
+CONTAINER.appendChild(a);
 
 
 // Listen for messages from the extension code.

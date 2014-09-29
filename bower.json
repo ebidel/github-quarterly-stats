@@ -1,7 +1,7 @@
 {
   "name": "github_stats_scrapper",
   "main": "github_stats_scrapper.js",
-  "version": "0.0.1",
+  "version": "0.0.3",
   "authors": [
     "Eric Bidelman <ebidel@gmail.com>"
   ],
